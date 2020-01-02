@@ -9,7 +9,7 @@ services:
         depends_on:
             - php
         volumes:
-            - app:/var/www/mferly
+            - app:/var/www/xx-array
 
     php:
         image: mferly/mferly_php:latest
@@ -24,7 +24,7 @@ services:
             restart_policy:
                 condition: on-failure
         volumes:
-            - app:/var/www/mferly
+            - app:/var/www/xx-array
 
 volumes:
     app:
