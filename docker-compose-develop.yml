@@ -2,7 +2,10 @@ version: '3'
 
 services:
     nginx:
-        image: xx-array_nginx:latest
+        # image: xx-array_nginx:latest
+        build:
+            context: .
+            dockerfile: Dockerfile-nginx
         ports:
             - 443:443
             - 80:80
@@ -19,7 +22,10 @@ services:
             - /var/www/xx-array/docker/nginx/conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
 
     php:
-        image: xx-array_php:latest
+        # image: xx-array_php:latest
+        build:
+            context: .
+            dockerfile: Dockerfile-php
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: dev
