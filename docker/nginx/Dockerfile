@@ -5,12 +5,15 @@ RUN apt-get update && apt-get upgrade -y \
         netcat-openbsd \
     && apt-get autoremove -y
 
-COPY ./docker/nginx/certs/xx-array-cert.pem /etc/ssl/certs/xx-array-cert.pem
-COPY ./docker/nginx/certs/xx-array-key.pem /etc/ssl/private/xx-array-key.pem
-COPY ./docker/nginx/certs/dhparam.pem /etc/nginx/dhparam.pem
-COPY ./docker/nginx/conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./docker/nginx/conf/xx-array.conf /etc/nginx/conf.d/xx-array.conf
-COPY ./docker/nginx/conf/self-signed.conf /etc/nginx/conf.d/self-signed.conf
-COPY ./docker/nginx/conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
+ENV APP_NAME=xx-array
+ENV APP_PATH=/var/www/xx-array
+
+COPY ./certs/${APP_NAME}-cert.pem /etc/ssl/certs/${APP_NAME}-cert.pem
+COPY ./certs/${APP_NAME}-key.pem /etc/ssl/private/${APP_NAME}-key.pem
+COPY ./certs/dhparam.pem /etc/nginx/dhparam.pem
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/${APP_NAME}.conf /etc/nginx/conf.d/${APP_NAME}.conf
+COPY ./conf/self-signed.conf /etc/nginx/conf.d/self-signed.conf
+COPY ./conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
 
 RUN update-ca-certificates

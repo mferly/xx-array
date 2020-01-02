@@ -2,17 +2,21 @@ version: '3'
 
 services:
     nginx:
-        image: mferly/mferly_nginx:latest
+        build:
+            context: ./docker/nginx
+            dockerfile: Dockerfile
         ports:
             - 443:443
             - 80:80
         depends_on:
             - php
         volumes:
-            - app:/var/www/xx-array
+            - app:${APP_PATH}
 
     php:
-        image: mferly/mferly_php:latest
+        build:
+            context: .
+            dockerfile: Dockerfile
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: prod
@@ -24,7 +28,7 @@ services:
             restart_policy:
                 condition: on-failure
         volumes:
-            - app:/var/www/xx-array
+            - app:${APP_PATH}
 
 volumes:
     app:

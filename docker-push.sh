@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker push mferly/mferly_nginx:latest
-docker push mferly/mferly_php:latest
+docker push $1/$2_nginx:latest
+docker push $1/$2_php:latest

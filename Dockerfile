@@ -39,5 +39,7 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
     && apt-get install -y --no-install-recommends nodejs yarn \
     && apt-get autoremove -y
 
-COPY . /var/www/xx-array
-RUN sh /var/www/xx-array/bin/build.sh
+ENV APP_PATH=/var/www/xx-array
+
+COPY . ${APP_PATH}
+RUN sh ${APP_PATH}/bin/build.sh

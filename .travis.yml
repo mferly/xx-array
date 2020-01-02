@@ -30,24 +30,19 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - sh ./docker-build.sh $APP_NAME
 
 before_script:
   - travis_retry composer update -n
-  - docker build --pull --force-rm --no-cache -f ./Dockerfile-nginx -t mferly/mferly_nginx:latest .
-  - docker build --pull --force-rm --no-cache -f ./Dockerfile-php -t mferly/mferly_php:latest .
   - docker-compose up -d
 
 script:
+  # just a test script, literally.
+  # needs to be executable, eg. $ chmod +x test.sh (locally)
+  #   or you can chmod it in the before_install section above
   - sh ./test.sh
 
 after_script:
   - docker-compose down
-
-after_success:
-  # - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push mferly/mferly_nginx:latest
-  - docker push mferly/mferly_php:latest
-  # - sh ./docker-push.sh
 
 sudo: required

@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker build --pull --force-rm --no-cache -f ./Dockerfile-nginx -t xx-array_nginx:latest .
-docker build --pull --force-rm --no-cache -f ./Dockerfile-php -t xx-array_php:latest .
+docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t $1_nginx:latest .
+docker build --pull --force-rm --no-cache -f ./Dockerfile -t $1_php:latest .
