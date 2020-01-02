@@ -2,7 +2,7 @@ version: '3'
 
 services:
     nginx:
-        image: mferly/mferly_nginx:latest
+        image: xx-array_nginx:latest
         ports:
             - 443:443
             - 80:80
@@ -19,7 +19,7 @@ services:
             - ./docker/nginx/conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
 
     php:
-        image: mferly/mferly_php:latest
+        image: xx-array_php:latest
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: dev
