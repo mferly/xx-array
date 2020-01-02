@@ -5,6 +5,7 @@ services:
 
 branches:
   only:
+    - develop
     - master
     - stable
 
