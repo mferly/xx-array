@@ -47,10 +47,7 @@ after_script:
   - docker-compose down
 
 after_success:
-  # - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push ${REPO}/${APP_NAME}_nginx:latest
-  - docker push ${REPO}/${APP_NAME}_php:latest
-  # - sh ./docker-push.sh  
+  - sh ./docker-push.sh  
 
 sudo: required
