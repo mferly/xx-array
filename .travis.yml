@@ -15,7 +15,7 @@ branches:
 env:
   global:
     - COMMIT=${TRAVIS_COMMIT::7}
-    - DOCKER_COMPOSE_VERSION: 1.4.2
+  DOCKER_COMPOSE_VERSION: 3
 
 language: php
 
