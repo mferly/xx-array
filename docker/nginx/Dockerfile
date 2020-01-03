@@ -8,12 +8,12 @@ RUN apt-get update && apt-get upgrade -y \
 ENV APP_NAME=xx-array
 ENV APP_PATH=/var/www/xx-array
 
-COPY ./certs/${APP_NAME}-cert.pem /etc/ssl/certs/${APP_NAME}-cert.pem
-COPY ./certs/${APP_NAME}-key.pem /etc/ssl/private/${APP_NAME}-key.pem
-COPY ./certs/dhparam.pem /etc/nginx/dhparam.pem
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./conf/${APP_NAME}.conf /etc/nginx/conf.d/${APP_NAME}.conf
-COPY ./conf/self-signed.conf /etc/nginx/conf.d/self-signed.conf
-COPY ./conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
+COPY certs/${APP_NAME}-cert.pem /etc/ssl/certs/${APP_NAME}-cert.pem
+COPY certs/${APP_NAME}-key.pem /etc/ssl/private/${APP_NAME}-key.pem
+COPY certs/dhparam.pem /etc/nginx/dhparam.pem
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/${APP_NAME}.conf /etc/nginx/conf.d/${APP_NAME}.conf
+COPY conf/self-signed.conf /etc/nginx/conf.d/self-signed.conf
+COPY conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
 
 RUN update-ca-certificates
