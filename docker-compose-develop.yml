@@ -2,7 +2,6 @@ version: '3'
 
 services:
     nginx:
-        # image: ${APP_NAME}_nginx:latest
         build:
             context: ./docker/nginx
             dockerfile: Dockerfile
@@ -22,7 +21,6 @@ services:
             - ${APP_PATH}/docker/nginx/conf/ssl-params.conf /etc/nginx/conf.d/ssl-params.conf
 
     php:
-        # image: ${APP_NAME}_php:latest
         build:
             context: .
             dockerfile: Dockerfile
