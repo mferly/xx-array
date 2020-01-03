@@ -35,6 +35,10 @@ before_install:
   - sudo rm .env
   - echo "GIT_BRANCH=$TRAVIS_BRANCH" >> .env
   - echo "GIT_COMMIT_HASH=$COMMIT" >> .env
+  - echo "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT"
+  - echo "$REPO"/"$APP_NAME"_nginx:$TRAVIS_BRANCH-$COMMIT
+  - echo "$REPO"/"$APP_NAME"_php:"$TRAVIS_BRANCH"-"$COMMIT"
+  - echo "$REPO"/"$APP_NAME"_php:$TRAVIS_BRANCH-$COMMIT
   - docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT" ./docker/nginx
   - docker build --pull --force-rm --no-cache -f ./Dockerfile -t "$REPO"/"$APP_NAME"_php:"$TRAVIS_BRANCH"-"$COMMIT" .
 
