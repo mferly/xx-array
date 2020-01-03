@@ -1,7 +1,3 @@
-###> mferly ###
-docker-build.sh
-###< mferly ###
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
