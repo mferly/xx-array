@@ -13,7 +13,8 @@ branches:
     - stable
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.25.0
+  - DOCKER_COMPOSE_VERSION: 1.4.2
+  - COMMIT=${TRAVIS_COMMIT::7}
 
 language: php
 
@@ -29,15 +30,7 @@ cache:
   directories:
     - "$HOME/.composer/cache"
 
-env:
-  global:
-      - COMMIT=${TRAVIS_COMMIT::7}
-
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
   - sudo rm .env
   - echo "GIT_BRANCH=$TRAVIS_BRANCH\nGIT_COMMIT_HASH=$COMMIT" >> .env
   - docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT" ./docker/nginx
