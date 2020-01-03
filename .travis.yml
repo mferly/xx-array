@@ -34,7 +34,10 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - sh ./docker-build.sh $APP_NAME
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t ${REPO}/${APP_NAME}_nginx:latest .;
+      docker build --pull --force-rm --no-cache -f ./Dockerfile -t ${REPO}/${APP_NAME}_php:latest .;
+    fi
 
 before_script:
   - travis_retry composer update -n
