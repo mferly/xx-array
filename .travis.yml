@@ -52,8 +52,8 @@ after_script:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker push ${REPO}/${APP_NAME}_nginx:latest
-      docker push ${REPO}/${APP_NAME}_php:latest
+      docker push ${REPO}/${APP_NAME}_nginx:latest;
+      docker push ${REPO}/${APP_NAME}_php:latest;
     fi
 
 sudo: required
