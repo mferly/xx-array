@@ -29,16 +29,19 @@ cache:
   directories:
     - "$HOME/.composer/cache"
 
+env:
+  global:
+      - COMMIT=${TRAVIS_COMMIT::7}
+
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - |
-    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:latest ./docker/nginx;
-      docker build --pull --force-rm --no-cache -f ./Dockerfile -t "$REPO"/"$APP_NAME"_php:latest .;
-    fi
+  - sudo rm .env
+  - echo "GIT_BRANCH=$TRAVIS_BRANCH\nGIT_COMMIT_HASH=$COMMIT" >> .env
+  - docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT" ./docker/nginx
+  - docker build --pull --force-rm --no-cache -f ./Dockerfile -t "$REPO"/"$APP_NAME"_php:"$TRAVIS_BRANCH"-"$COMMIT" .
 
 before_script:
   - travis_retry composer update -n
@@ -54,11 +57,8 @@ after_script:
   - docker-compose down
 
 after_success:
-  - |
-    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      docker push "$REPO"/"$APP_NAME"_nginx:latest;
-      docker push "$REPO"/"$APP_NAME"_php:latest;
-    fi
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT";
+  - docker push "$REPO"/"$APP_NAME"_php:"$TRAVIS_BRANCH"-"$COMMIT";
 
 sudo: required
