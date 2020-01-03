@@ -2,7 +2,7 @@ version: '3'
 
 services:
     nginx:
-        image: ${REPO}/${APP_NAME}_nginx:latest
+        image: ${REPO}/${APP_NAME}_nginx:${GIT_BRANCH}-${GIT_COMMIT_HASH}
         ports:
             - 443:443
         depends_on:
@@ -11,7 +11,7 @@ services:
             - app:${APP_PATH}
 
     php:
-        image: ${REPO}/${APP_NAME}_php:latest
+        image: ${REPO}/${APP_NAME}_php:${GIT_BRANCH}-${GIT_COMMIT_HASH}
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: prod
