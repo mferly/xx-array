@@ -35,8 +35,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t ${REPO}/${APP_NAME}_nginx:latest .;
-      docker build --pull --force-rm --no-cache -f ./Dockerfile -t ${REPO}/${APP_NAME}_php:latest .;
+      docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:latest .;
+      docker build --pull --force-rm --no-cache -f ./Dockerfile -t "$REPO"/"$APP_NAME"_php:latest .;
     fi
 
 before_script:
@@ -55,8 +55,8 @@ after_script:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker push ${REPO}/${APP_NAME}_nginx:latest;
-      docker push ${REPO}/${APP_NAME}_php:latest;
+      docker push "$REPO"/"$APP_NAME"_nginx:latest;
+      docker push "$REPO"/"$APP_NAME"_php:latest;
     fi
 
 sudo: required
