@@ -36,7 +36,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - |
     if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:latest .;
+      docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:latest ./docker/nginx;
       docker build --pull --force-rm --no-cache -f ./Dockerfile -t "$REPO"/"$APP_NAME"_php:latest .;
     fi
 
