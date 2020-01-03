@@ -3,7 +3,8 @@ FROM nginx:latest
 RUN apt-get update && apt-get upgrade -y \
         ca-certificates \
         netcat-openbsd \
-    && apt-get autoremove -y
+    && apt-get autoremove -y \
+    && rm /etc/nginx/conf.d/default.conf
 
 ENV APP_NAME=xx-array
 ENV APP_PATH=/var/www/xx-array
