@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/mferly/mferly.svg?branch=master)](https://travis-ci.com/mferly/mferly)
+[![Build Status](https://travis-ci.com/mferly/xx-array.svg?branch=master)](https://travis-ci.com/mferly/xx-array)
 
 # What is this thing?
 Handy boilerplate to get up and running with the following:
@@ -12,7 +12,7 @@ Handy boilerplate to get up and running with the following:
 # Install/Setup
 
 ```bash
-$ git clone git@github.com:mferly/mferly.git
+$ git clone git@github.com:mferly/xx-array.git
 ```
 
 You'll need to edit a few files before you get up and running. They're are:
