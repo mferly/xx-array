@@ -2,9 +2,7 @@ version: '3'
 
 services:
     nginx:
-        build:
-            context: ./docker/nginx
-            dockerfile: Dockerfile
+        image: ${REPO}/${APP_NAME}_nginx:latest
         ports:
             - 443:443
             - 80:80
@@ -14,9 +12,7 @@ services:
             - app:${APP_PATH}
 
     php:
-        build:
-            context: .
-            dockerfile: Dockerfile
+        image: ${REPO}/${APP_NAME}_php:latest
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: prod
