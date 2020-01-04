@@ -1,5 +1,6 @@
 .travis.bak.yml
 docker-compose.override.yml
+*.bak
 
 ###> symfony/framework-bundle ###
 /.env.local
