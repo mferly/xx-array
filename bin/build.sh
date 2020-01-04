@@ -12,11 +12,11 @@ which yarn     >/dev/null || Fail "yarn not found"
 
 cd "$(realpath "$(dirname "$0")"/..)"
 
-composer update --prefer-dist --no-interaction
+composer update --prefer-dist --no-interaction --no-dev
 composer dump-autoload --optimize --no-dev --classmap-authoritative
 
-php bin/console cache:clear --no-warmup --env=prod
-php bin/console cache:warmup --env=prod
+APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear --no-warmup --env=prod --no-debug
+APP_ENV=prod APP_DEBUG=0 php bin/console cache:warmup --env=prod
 
 yarn
 yarn encore production
