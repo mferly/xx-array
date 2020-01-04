@@ -14,7 +14,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "semantic-ui": "2.4.2"
+        "fomantic-ui": "2.8.2"
     },
     "resolutions": {
         "**/**/braces": "^2.3.1",

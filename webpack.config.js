@@ -25,9 +25,9 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
 
-    // add semantic-ui entries
-    .addEntry('semantic-css', './node_modules/semantic-ui/dist/semantic.min.css')
-    .addEntry('semantic-js', './node_modules/semantic-ui/dist/semantic.min.js')
+    // add fomantic-ui entries
+    .addEntry('fomantic-css', './node_modules/fomantic-ui/dist/semantic.min.css')
+    .addEntry('fomantic-js', './node_modules/fomantic-ui/dist/semantic.min.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

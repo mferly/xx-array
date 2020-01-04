@@ -1,4 +1,5 @@
 .travis.bak.yml
+*.bak
 
 ###> symfony/framework-bundle ###
 /.env.local

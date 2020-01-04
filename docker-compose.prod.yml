@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    nginx:
+        image: ${REPO}/${APP_NAME}_nginx:${BRANCH}-${COMMIT}
+        environment:
+            TIMEZONE: America/Toronto
+            APP_ENV: prod
+        ports:
+            - 443:443
+        depends_on:
+            - php
+        volumes:
+            - app:${APP_PATH}:ro
+
+    php:
+        image: ${REPO}/${APP_NAME}_php:${BRANCH}-${COMMIT}
+        environment:
+            TIMEZONE: America/Toronto
+            APP_ENV: prod
+        ports:
+            - 9000:9000
+        volumes:
+            - app:${APP_PATH}:ro
+        deploy:
+            mode: replicated
+            replicas: 5
+            restart_policy:
+                condition: on-failure
+
+volumes:
+    app:
