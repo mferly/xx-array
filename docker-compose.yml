@@ -2,16 +2,14 @@ version: '3'
 
 services:
     nginx:
-        image: ${REPO}/${APP_NAME}_nginx:${GIT_BRANCH}-${GIT_COMMIT_HASH}
+        image: ${REPO}/${APP_NAME}_nginx:${TAG}
         ports:
             - 443:443
         depends_on:
             - php
-        volumes:
-            - app:${APP_PATH}
 
     php:
-        image: ${REPO}/${APP_NAME}_php:${GIT_BRANCH}-${GIT_COMMIT_HASH}
+        image: ${REPO}/${APP_NAME}_php:${TAG}
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: prod
@@ -22,8 +20,3 @@ services:
             replicas: 5
             restart_policy:
                 condition: on-failure
-        volumes:
-            - app:${APP_PATH}
-
-volumes:
-    app:

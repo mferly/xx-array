@@ -11,11 +11,12 @@ services:
             - php
         volumes:
             - ./:${APP_PATH}
+            - ./docker/nginx/conf/xx-array-develop.conf:/etc/nginx/conf.d/xx-array.conf
 
     php:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile-develop
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: dev

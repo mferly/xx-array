@@ -15,4 +15,4 @@ RUN apk add --update --no-cache $PHPIZE_DEPS \
 ENV APP_PATH=/var/www/xx-array
 
 COPY . ${APP_PATH}
-RUN sh ${APP_PATH}/bin/build.sh prod 0 production
+RUN sh ${APP_PATH}/bin/build.sh dev 1 dev
