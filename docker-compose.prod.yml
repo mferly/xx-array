@@ -2,7 +2,7 @@ version: '3'
 
 services:
     nginx:
-        image: ${REPO}/${APP_NAME}_nginx:${NGINX_TAG}
+        image: ${REPO}/${APP_NAME}_nginx:${BRANCH}:${COMMIT}
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: prod
@@ -14,7 +14,7 @@ services:
             - app:${APP_PATH}:ro
 
     php:
-        image: ${REPO}/${APP_NAME}_php:${PHP_TAG}
+        image: ${REPO}/${APP_NAME}_php:${BRANCH}:${COMMIT}
         environment:
             TIMEZONE: America/Toronto
             APP_ENV: prod

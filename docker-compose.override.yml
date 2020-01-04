@@ -24,8 +24,3 @@ services:
             - 9000:9000
         volumes:
             - ./:${APP_PATH}
-        deploy:
-            mode: replicated
-            replicas: 5
-            restart_policy:
-                condition: on-failure
