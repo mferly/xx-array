@@ -1,5 +1,6 @@
 .travis.yml
 docker-compose.yml
+docker-compose.override.yml
 docker-build.sh
 README.md
 node_modules
