@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+    nginx:
+        build:
+            context: ./docker/nginx
+            dockerfile: Dockerfile
+        ports:
+            - 443:443
+        depends_on:
+            - php
+        volumes:
+            - ./:${APP_PATH}
+            - ./docker/nginx/conf/xx-array-develop.conf:/etc/nginx/conf.d/xx-array.conf
+
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile-develop
+        environment:
+            TIMEZONE: America/Toronto
+            APP_ENV: dev
+        expose:
+            - 9000
+        deploy:
+            mode: replicated
+            replicas: 5
+            restart_policy:
+                condition: on-failure
+        volumes:
+            - ./:${APP_PATH}
