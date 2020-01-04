@@ -10,7 +10,7 @@ services:
         depends_on:
             - php
         volumes:
-            - ${APP_PATH}/:${APP_PATH}
+            - ./:${APP_PATH}
             - ./docker/nginx/certs/${APP_NAME}-cert.pem /etc/ssl/certs/${APP_NAME}-cert.pem
             - ./docker/nginx/certs/${APP_NAME}-key.pem /etc/ssl/private/${APP_NAME}-key.pem
             - ./docker/nginx/certs/dhparam.pem /etc/nginx/dhparam.pem
