@@ -2,9 +2,9 @@ version: '3'
 
 services:
     nginx:
-        image: ${REPO}/${APP_NAME}_nginx:${BRANCH}:${COMMIT}
+        image: ${REPO}/${APP_NAME}_nginx:${BRANCH}-${COMMIT}
         depends_on:
             - php
 
     php:
-        image: ${REPO}/${APP_NAME}_php:${BRANCH}:${COMMIT}
+        image: ${REPO}/${APP_NAME}_php:${BRANCH}-${COMMIT}
