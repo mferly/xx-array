@@ -35,11 +35,6 @@ before_install:
   - sudo rm .env
   - echo "GIT_BRANCH=$TRAVIS_BRANCH" >> .env
   - echo "GIT_COMMIT_HASH=$COMMIT" >> .env
-  - echo "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT" >> asdf.php
-  - echo "$REPO"/"$APP_NAME"_nginx:$TRAVIS_BRANCH-$COMMIT >> asdf.php
-  - echo "$REPO"/"$APP_NAME"_php:"$TRAVIS_BRANCH"-"$COMMIT" >> asdf.php
-  - echo "$REPO"/"$APP_NAME"_php:$TRAVIS_BRANCH-$COMMIT >> asdf.php
-  - cat asdf.php
   - docker build --pull --force-rm --no-cache -f ./docker/nginx/Dockerfile -t "$REPO"/"$APP_NAME"_nginx:"$TRAVIS_BRANCH"-"$COMMIT" ./docker/nginx
   - docker build --pull --force-rm --no-cache -f ./Dockerfile -t "$REPO"/"$APP_NAME"_php:"$TRAVIS_BRANCH"-"$COMMIT" .
 
@@ -59,7 +54,12 @@ script:
   - sh ./test.sh
 
 after_script:
-  - docker-compose down
+  - |
+    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker-compose -f docker-compose.yml -f docker-compose.prod.yml down -v
+    else
+      docker-compose -f docker-compose.yml -f docker-compose.override.yml down -v
+    fi
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin

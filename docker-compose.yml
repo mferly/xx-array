@@ -2,21 +2,9 @@ version: '3'
 
 services:
     nginx:
-        image: ${REPO}/${APP_NAME}_nginx:${TAG}
-        ports:
-            - 443:443
+        image: ${REPO}/${APP_NAME}_nginx:${NGINX_TAG}
         depends_on:
             - php
 
     php:
-        image: ${REPO}/${APP_NAME}_php:${TAG}
-        environment:
-            TIMEZONE: America/Toronto
-            APP_ENV: prod
-        expose:
-            - 9000
-        deploy:
-            mode: replicated
-            replicas: 5
-            restart_policy:
-                condition: on-failure
+        image: ${REPO}/${APP_NAME}_php:${PHP_TAG}
