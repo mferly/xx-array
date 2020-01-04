@@ -45,7 +45,12 @@ before_install:
 
 before_script:
   - travis_retry composer update -n
-  - docker-compose up -d
+  - |
+    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+    else
+      docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+    fi
 
 script:
   # just a test script, literally.
